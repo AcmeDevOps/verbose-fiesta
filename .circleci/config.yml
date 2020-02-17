@@ -85,9 +85,11 @@ jobs:
                 command: |
                     RESPONSE=$(curl -H "Authorization: ${GITHUB_TOKEN}" https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest)
                     TAG=$(echo $RESPONSE | jq -r '.tag_name')
+                    MAJ_MIN=$(echo $TAG | sed "s/\.[^\.]*$//")
                     PATCH=$(echo $TAG | sed 's/.*\.//')
                     LATEST="$((PATCH + 1))"
-                    echo $LATEST
+                    NEW_SEMVER="$MAJ_MIN.$LATEST"
+                    echo $NEW_SEMVER
 
 workflows:
     version_branch:
