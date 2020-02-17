@@ -12,6 +12,7 @@ The purpose of this project is to test different stuff in CircleCI. Make sure th
    - repo:status
    - repo_deployment
 2. Go to the CCI project and add this environment variable, *GITHUB_TOKEN* with the value of the token in step 1.
+3. [Generate a machine user](https://circleci.com/docs/2.0/gh-bb-integration/#controlling-access-via-a-machine-user) follow the steps in this stanza
 
 Uses,
 [Go github-release](https://github.com/aktau/github-release)
