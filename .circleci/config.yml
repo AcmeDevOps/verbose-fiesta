@@ -14,10 +14,10 @@ jobs:
             - run:
                 command: |
                     echo "echo-ing vars used"
-                    echo "GITHUB_TOKEN: $GITHUB_TOKEN"
-                    echo "CIRCLE_PROJECT_USERNAME: $CIRCLE_PROJECT_USERNAME"
-                    echo "CIRCLE_PROJECT_REPONAME: $CIRCLE_PROJECT_REPONAME"
-                    echo "CIRCLECI_TOKEN: $CIRCLECI_TOKEN"
+                    echo "GITHUB_TOKEN: ${GITHUB_TOKEN}"
+                    echo "CIRCLE_PROJECT_USERNAME: ${CIRCLE_PROJECT_USERNAME}"
+                    echo "CIRCLE_PROJECT_REPONAME: ${CIRCLE_PROJECT_REPONAME}"
+                    echo "CIRCLECI_TOKEN: ${CIRCLECI_TOKEN}"
 
     job_01:
         <<: *docker_container
