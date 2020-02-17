@@ -102,9 +102,7 @@ jobs:
                     github-release release \
                         --user ${CIRCLE_PROJECT_USERNAME} \
                         --repo ${CIRCLE_PROJECT_REPONAME} \
-                        --tag ${NEW_SEMVER} \
-                        --pre-release
-
+                        --tag ${NEW_SEMVER}
 workflows:
     version_branch:
         jobs:
