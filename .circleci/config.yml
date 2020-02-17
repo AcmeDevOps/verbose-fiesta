@@ -1,10 +1,15 @@
 version: 2.1
 
+aliases:
+
+    - &docker_container
+      docker:
+        - image: circleci/golang:latest
+
 jobs:
-    tag_branch:
+    job_01:
+        <<: *docker_container
         description: tags a branch
-        docker:
-            - image: circleci/golang:latest
         steps:
             - run:
                 name: setup github-release
@@ -22,10 +27,20 @@ jobs:
                         -u ${CIRCLE_PROJECT_USERNAME} \
                         -r ${CIRCLE_PROJECT_REPONAME}
 
+    job_02:
+        <<: *docker_container
+        description: get env vars
+        steps:
+            - run:
+                command: |
+                    curl https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/envvar?circle-token=${CIRCLECI_TOKEN}
+
+
 workflows:
     version_branch:
         jobs:
-            - tag_branch:
+            - job_01
+            - job_02:
                 filters:
                     branches:
                         only:
