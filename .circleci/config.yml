@@ -1,5 +1,9 @@
 version: 2.1
 
+orbs:
+
+    jq: circleci/jq@1.9.1
+
 aliases:
 
     - &docker_container
@@ -76,9 +80,12 @@ jobs:
         <<: *docker_container
         description: call GH api to get latest version
         steps:
+            - jq/install
             - run: 
                 command: |
-                    curl -H "Authorization: ${GITHUB_TOKEN}" https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest
+                    "$(curl https://${GITHUB_TOKEN}@api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest | jq -r '.tag_name' )"
+                    RESPONSE=curl -H "Authorization: ${GITHUB_TOKEN}" https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest
+                    echo "$(RESPONSE | jq -r '.tag_name')"
 
 workflows:
     version_branch:
