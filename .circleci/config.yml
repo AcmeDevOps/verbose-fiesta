@@ -8,7 +8,7 @@ aliases:
 
 jobs:
     job_00:
-        << *docker_container
+        <<: *docker_container
         description: echo stuff
         steps:
             - run:
