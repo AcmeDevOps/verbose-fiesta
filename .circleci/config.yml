@@ -81,6 +81,7 @@ jobs:
         description: call GH api to get latest version
         steps:
             - jq/install
+            - checkout
             - run: 
                 command: |
                     RESPONSE=$(curl -H "Authorization: ${GITHUB_TOKEN}" https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest)
