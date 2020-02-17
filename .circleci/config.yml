@@ -14,7 +14,10 @@ jobs:
             - run:
                 command: |
                     echo "echo-ing vars used"
-                    echo "BASH_ENV: ${BASH_ENV}"
+                    echo "BASH_ENV"
+                    while IFS= read -r line; do
+                      echo "a line: $line"
+                    done < ${BASH_ENV}
                     echo "CIRCLE_PROJECT_USERNAME: ${CIRCLE_PROJECT_USERNAME}"
                     echo "CIRCLE_PROJECT_REPONAME: ${CIRCLE_PROJECT_REPONAME}"
                     echo "ACME_CIRCLECI_API_TOKEN: ${ACME_CIRCLECI_API_TOKEN}"
