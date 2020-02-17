@@ -13,6 +13,14 @@ jobs:
             - run:
                 command: |
                     echo ${GITHUB_TOKEN}
+                    echo ${CIRCLE_PROJECT_USERNAME}
+                    echo ${CIRCLE_PROJECT_REPONAME}
+                    
+                    echo "getting release info"
+
+                    github-release info \
+                        -u ${CIRCLE_PROJECT_USERNAME} \
+                        -r ${CIRCLE_PROJECT_REPONAME}
 
 workflows:
     version: 2
