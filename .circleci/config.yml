@@ -1,0 +1,32 @@
+version: 2.1
+
+jobs:
+    tag_branch:
+        description: tags a branch
+        docker:
+            - image: circleci/golang:latest
+        steps:
+            - run:
+                name: setup github-release
+                command: |
+                    go get github.com/aktau/github-release
+            - run:
+                command: |
+                    echo ${GITHUB_TOKEN}
+                    echo ${CIRCLE_PROJECT_USERNAME}
+                    echo ${CIRCLE_PROJECT_REPONAME}
+
+                    echo "getting release info"
+
+                    github-release info \
+                        -u ${CIRCLE_PROJECT_USERNAME} \
+                        -r ${CIRCLE_PROJECT_REPONAME}
+
+workflows:
+    version_branch:
+        jobs:
+            - tag_branch:
+                filters:
+                    branches:
+                        only:
+                            - master
