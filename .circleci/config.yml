@@ -89,7 +89,7 @@ jobs:
                     PATCH=$(echo $TAG | sed 's/.*\.//')
                     LATEST="$((PATCH + 1))"
                     NEW_SEMVER="$MAJ_MIN.$LATEST"
-                    echo $NEW_SEMVER
+                    git tag $NEW_SEMVER && git push --tags
 
 workflows:
     version_branch:
