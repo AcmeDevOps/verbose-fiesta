@@ -7,6 +7,18 @@ aliases:
         - image: circleci/golang:latest
 
 jobs:
+    job_00:
+        << *docker_container
+        description: echo stuff
+        steps:
+            - run:
+                command: |
+                echo "echo-ing vars used"
+                echo "GITHUB_TOKEN: ${GITHUB_TOKEN}"
+                echo "CIRCLE_PROJECT_USERNAME: ${CIRCLE_PROJECT_USERNAME}"
+                echo "CIRCLE_PROJECT_REPONAME: ${CIRCLE_PROJECT_REPONAME}"
+                echo "CIRCLECI_TOKEN: ${CIRCLECI_TOKEN}"
+
     job_01:
         <<: *docker_container
         description: tags a branch
@@ -17,12 +29,7 @@ jobs:
                     go get github.com/aktau/github-release
             - run:
                 command: |
-                    echo ${GITHUB_TOKEN}
-                    echo ${CIRCLE_PROJECT_USERNAME}
-                    echo ${CIRCLE_PROJECT_REPONAME}
-
                     echo "getting release info"
-
                     github-release info \
                         -u ${CIRCLE_PROJECT_USERNAME} \
                         -r ${CIRCLE_PROJECT_REPONAME}
@@ -33,12 +40,13 @@ jobs:
         steps:
             - run:
                 command: |
-                    curl https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/envvar?circle-token=${CIRCLECI_TOKEN}
+                curl https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/envvar?circle-token=${CIRCLECI_TOKEN}
 
 
 workflows:
     version_branch:
         jobs:
+            - job_00
             - job_01
             - job_02:
                 filters:
