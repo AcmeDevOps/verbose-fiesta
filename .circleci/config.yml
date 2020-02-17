@@ -6,6 +6,12 @@ aliases:
       docker:
         - image: circleci/golang:latest
 
+    - &filter_master
+      filters:
+        branches:
+            only:
+                - master
+
 jobs:
     job_00:
         <<: *docker_container
@@ -41,14 +47,28 @@ jobs:
                 command: |
                     curl https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/envvar?circle-token=${ACME_CIRCLECI_API_TOKEN}
 
+    job_03:
+        <<: *docker_container
+        description: delete version envvar
+        steps:
+            - run: 
+                command: |
+                    curl -X DELETE https://circleci.com/api/v1.1/project/github/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/envvar/SEMVER?circle-token=${ACME_CIRCLECI_API_TOKEN}     
 
 workflows:
     version_branch:
         jobs:
-            - job_00
-            - job_01
+            - job_00:
+                <<: *filter_master
+            - job_01:
+                <<: *filter_master
+                requires:
+                    - job_00
             - job_02:
-                filters:
-                    branches:
-                        only:
-                            - master
+                <<: *filter_master
+                requires:
+                    - job_01
+            - job_03:
+                <<: *filter_master
+                requires:
+                    - job_02
