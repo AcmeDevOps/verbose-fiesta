@@ -125,5 +125,5 @@ workflows:
                    - get_envvar_semver
             - get_github_version:
                 <<: *filter_master
-               requires:
-                   - delete_envvar_semver
+                requires:
+                    - delete_envvar_semver
