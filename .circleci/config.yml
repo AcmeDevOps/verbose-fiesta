@@ -84,7 +84,7 @@ jobs:
             - run: 
                 command: |
                     RESPONSE=$(curl -H "Authorization: ${GITHUB_TOKEN}" https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest)
-                    TAG=$RESPONSE | jq -r '.tag_name'
+                    TAG=jq $RESPONSE | jq -r '.tag_name'
                     echo $TAG
 
 workflows:
