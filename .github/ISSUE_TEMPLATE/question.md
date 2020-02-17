@@ -7,4 +7,4 @@ about: If you have questions, please check out both open and closed issues
 
 ### Please note that this issue tracker is not a help form and this issue will be closed.
 
-Please contact us instead, {{contact_email}}
+Please contact us instead, trentmillar@gmail.com

@@ -19,10 +19,10 @@ _A clear and concise description of what the problem is._
 _Make sure your have performed every step and checked the applicable boxes before submitting your issue. Thank you!_
 
 - [ ] Read the [Contributing Guide and Policy](../CONTRIBUTING.md) and [the Code of Conduct](../CODE_OF_CONDUCT.md)
-- [ ] Searched the problem in [issues](https://github.com/{{github_account}}/{{repo_name}}/issues)
-- [ ] Searched the problem in the [docs](https://{{repo_name}}.github.io/docs/#/help/FAQ)
-- [ ] Searched the problem in the [forum]({{forum_url}})
-- [ ] Searched the problem in the [chat]({{discord_url}})
+- [ ] Searched the problem in [issues](https://github.com/AcmeDevOps/verbose-fiesta/issues)
+- [ ] Searched the problem in the [docs](https://verbose-fiesta.github.io/docs/#/help/FAQ)
+- [ ] Searched the problem in the [forum](Nope)
+- [ ] Searched the problem in the [chat](Nope)
 
 #### Environment
 
