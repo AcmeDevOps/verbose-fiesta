@@ -105,25 +105,25 @@ jobs:
 workflows:
     version_branch:
         jobs:
-            #- echo_envvars:
-            #    <<: *filter_master
-            #- github_release_info:
-            #    <<: *filter_master
-            #    requires:
-            #        - echo_envvars
-            #- list_envvars:
-            #    <<: *filter_master
-            #    requires:
-            #        - github_release_info
-            #- get_envvar_semver:
-            #    <<: *filter_master
-            #    requires:
-            #        - list_envvars
-            #- delete_envvar_semver:
-            #    <<: *filter_master
-            #    requires:
-            #        - get_envvar_semver
+            - echo_envvars:
+               <<: *filter_master
+            - github_release_info:
+               <<: *filter_master
+               requires:
+                   - echo_envvars
+            - list_envvars:
+               <<: *filter_master
+               requires:
+                   - github_release_info
+            - get_envvar_semver:
+               <<: *filter_master
+               requires:
+                   - list_envvars
+            - delete_envvar_semver:
+               <<: *filter_master
+               requires:
+                   - get_envvar_semver
             - get_github_version:
                 <<: *filter_master
-            #    requires:
-            #        - delete_envvar_semver
+               requires:
+                   - delete_envvar_semver
