@@ -16,6 +16,12 @@ aliases:
             only:
                 - master
 
+    - &setup_github_release
+      run:
+        name: setup github-release
+        command: |
+            go get github.com/aktau/github-release
+
 jobs:
     echo_envvars:
         <<: *docker_container
@@ -80,6 +86,7 @@ jobs:
         <<: *docker_container
         description: call GH api to get latest version
         steps:
+            <<: *setup_github_release
             - jq/install
             - checkout
             - run: 
