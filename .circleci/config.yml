@@ -86,7 +86,7 @@ jobs:
         <<: *docker_container
         description: call GH api to get latest version
         steps:
-            <<: *setup_github_release
+            - *setup_github_release
             - jq/install
             - checkout
             - run: 
