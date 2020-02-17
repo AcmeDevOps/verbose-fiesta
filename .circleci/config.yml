@@ -83,7 +83,8 @@ jobs:
             - jq/install
             - run: 
                 command: |
-                    TAG="$(curl curl -H "Authorization: ${GITHUB_TOKEN}" https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest | jq -r '.tag_name' )"
+                    RESPONSE=$(curl -H "Authorization: ${GITHUB_TOKEN}" https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/releases/latest)
+                    TAG=$RESPONSE | jq -r '.tag_name'
                     echo $TAG
 
 workflows:
