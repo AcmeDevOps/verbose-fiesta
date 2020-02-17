@@ -15,7 +15,7 @@ jobs:
                     echo ${GITHUB_TOKEN}
                     echo ${CIRCLE_PROJECT_USERNAME}
                     echo ${CIRCLE_PROJECT_REPONAME}
-                    
+
                     echo "getting release info"
 
                     github-release info \
@@ -23,10 +23,9 @@ jobs:
                         -r ${CIRCLE_PROJECT_REPONAME}
 
 workflows:
-    version: 2
     version_branch:
         jobs:
-            - tag_branch
+            - tag_branch:
                 filters:
                     branches:
                         only:
