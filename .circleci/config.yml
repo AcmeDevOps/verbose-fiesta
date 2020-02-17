@@ -92,6 +92,11 @@ jobs:
                     LATEST="$((PATCH + 1))"
                     NEW_SEMVER="$MAJ_MIN.$LATEST"
                     git tag $NEW_SEMVER && git push --tags
+                    github-release release \
+                        --user ${CIRCLE_PROJECT_USERNAME} \
+                        --repo ${CIRCLE_PROJECT_REPONAME} \
+                        --tag ${NEW_SEMVER} \
+                        --pre-release
 
 workflows:
     version_branch:
